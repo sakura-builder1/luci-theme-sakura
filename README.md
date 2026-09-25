@@ -68,6 +68,11 @@ opkg install luci-theme-sakura_*.ipk luci-i18n-sakura-zh-cn_*.ipk
 <img width="2557" height="1274" alt="image" src="https://github.com/user-attachments/assets/5781169d-4933-44b5-83e2-e54080a95ee3" />
 
 
+## 说明
+
+本项目的**代码、图标与文档均由 AI 辅助生成**，并经人工测试与调整后发布。
+图标使用 AI 图像模型（gpt-image-2.5）生成。
+
 ## 致谢
 
 - 基于 [luci-theme-argon](https://github.com/jerrykuku/luci-theme-argon)（Jerrykuku）二次开发

@@ -24,7 +24,7 @@
 opkg install luci-theme-sakura_*.ipk luci-i18n-sakura-zh-cn_*.ipk
 
 # 方式二：编译进固件
-# 把本包放进 package/custom/，然后在 .config 中启用：
+# 把本包放进 package/ 下（或你自己的 feed），然后在 .config 中启用：
 #   CONFIG_PACKAGE_luci-theme-sakura=y
 ```
 

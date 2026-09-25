@@ -65,6 +65,9 @@ opkg install luci-theme-sakura_*.ipk luci-i18n-sakura-zh-cn_*.ipk
 └── ucode/template/themes/sakura/     7 个模板
 ```
 
+<img width="2557" height="1274" alt="image" src="https://github.com/user-attachments/assets/5781169d-4933-44b5-83e2-e54080a95ee3" />
+
+
 ## 致谢
 
 - 基于 [luci-theme-argon](https://github.com/jerrykuku/luci-theme-argon)（Jerrykuku）二次开发

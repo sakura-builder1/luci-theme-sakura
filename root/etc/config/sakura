@@ -1,0 +1,12 @@
+config global
+	option primary '#D6336C'
+	option dark_primary '#483d8b'
+	option blur '0'
+	option blur_dark '0'
+	option transparency '0.3'
+	option transparency_dark '0.3'
+	option mode 'normal'
+	option login_bg ''
+	option dashboard_bg ''
+	option sakura '0'
+	option sakura_count '30'

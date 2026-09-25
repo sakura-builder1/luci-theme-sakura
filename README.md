@@ -69,7 +69,6 @@ opkg install luci-theme-sakura_*.ipk luci-i18n-sakura-zh-cn_*.ipk
 
 - 基于 [luci-theme-argon](https://github.com/jerrykuku/luci-theme-argon)（Jerrykuku）二次开发
 - 图标生成：AI（gpt-image-2.5）
-- 樱花飘落特效参考 [luci-theme-alpha](https://github.com/kenzok8) 的实现
 
 ## 许可
 

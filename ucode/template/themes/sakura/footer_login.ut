@@ -14,15 +14,21 @@
 	https://demos.creative-tim.com/argon-dashboard/index.html
 
 	Licensed to the public under the Apache License 2.0
+
+	------------------------------------------------------------------------
+	luci-theme-sakura (樱花主题)
+	基于 luci-theme-argon 二次开发
+	https://github.com/sakura-builder1/luci-theme-sakura
+	------------------------------------------------------------------------
 -#}
 
 </div>
 <!-- added style="text-wrap: auto" but on this page it is still not the best solution. I will take it to consideration next time :) -->
 <footer style="text-wrap: auto">
 	<div>
-		<a class="luci-link" href="https://github.com/openwrt/luci" target="_blank">Powered by {{ version.luciname }} ({{ version.luciversion }})</a>
-		<a href="https://github.com/jerrykuku/luci-theme-argon" target="_blank">ArgonTheme v2.4.3</a>
-		<a class="luci-link" href="{{ version.disturl }}" target="_blank">{{ version.distname }} {{ version.distversion }}-{{ version.distrevision }}</a>
+		<a class="luci-link" href="https://github.com/openwrt/luci" target="_blank">Powered by LuCI</a>
+		<a href="https://github.com/sakura-builder1/luci-theme-sakura" target="_blank">🌸 SakuraTheme v1.0.0</a>
+		<a class="luci-link" href="{{ version.disturl }}" target="_blank">{{ version.distname }} {{ replace(version.distversion, /-.*$/, '') }}</a>
 	</div>
 </footer>
 </div>

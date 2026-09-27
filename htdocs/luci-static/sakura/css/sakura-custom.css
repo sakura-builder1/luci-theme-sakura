@@ -255,3 +255,22 @@ body .main .main-left .nav li a[data-name="istore"]:first-child::before {
 .cbi-button-save:hover {
 	filter: brightness(1.08);
 }
+
+/* ==========================================================================
+   手机端适配（修复：侧边栏固定宽度破坏响应式 ✗）
+   桌面端保留 min-width:190px（菜单标题不换行 ✓）
+   手机端还原（让 Argon 的抽屉式侧边栏正常工作 ✓）
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+	.main .main-left { min-width: 0 !important; }
+}
+
+@media screen and (max-width: 480px) {
+	.main .main-left { min-width: 0 !important; }
+	/* 小屏下菜单图标略缩，避免拥挤 ✓ */
+	body .main .main-left .nav li .menu::before,
+	body .main .main-left .nav li a:first-child::before {
+		width: 19px !important;
+		height: 19px !important;
+	}
+}

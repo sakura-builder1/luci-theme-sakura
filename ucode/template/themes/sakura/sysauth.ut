@@ -54,16 +54,6 @@
 		let backgroundType = "Image";
 		let mimeType = "";
 
-		if (fs.access("/etc/config/argon")) {
-			let online_wallpaper = cfg.get_first('sakura', 'global', 'online_wallpaper') ?? (cfg.get_first('sakura', 'global', 'bing_background') == '1' ? 'bing' : null);
-			if (online_wallpaper && online_wallpaper != "none") {
-				const picurl = ubus.call("luci.argon_wallpaper", "get_url") ?? {};
-				if (picurl?.url) {
-					bgUrl = picurl.url;
-					return {bgUrl, backgroundType, mimeType};
-				}
-			}
-		}
 
 		let background = fetchMedia("/www" + themeDir, themeDir);
 		if ( length(background) > 0 ) {

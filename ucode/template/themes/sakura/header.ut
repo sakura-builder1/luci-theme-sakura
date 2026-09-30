@@ -26,7 +26,15 @@
 	const hostname = striptags(boardinfo?.hostname ?? '?');
 
 	let cfg = cursor();
-	let dashBg = cfg.get_first('sakura', 'global', 'dashboard_bg');
+/* 读取 sakura 配置：兼容命名段 global 和匿名段 @global[0]
+   配置页保存写的是命名段，包自带默认配置是匿名段，两边都要能读 */
+function sg(opt) {
+	let v = cfg.get_first('sakura', 'global', opt);
+	if (v == null) v = cfg.get_first('sakura', '@global[0]', opt);
+	return v;
+}
+
+	let dashBg = sg('dashboard_bg');
 	if (!dashBg || length(dashBg) == 0)
 		dashBg = null;
 	let dashBgIsVideo = false;
@@ -45,16 +53,35 @@
 	//Custom settings
 	let mode = 'normal';
 	let bar_color = '#5e72e4';
+/* 深色模式主色：由主色自动暗化生成 ✓ 不再需要单独配置 ✓ */
+function hexval(c) {
+	let i = index('0123456789abcdef', lc(c));
+	return (i < 0) ? 0 : i;
+}
+function darken(hex, f) {
+	let m = match(hex, /^#?([0-9a-fA-F]{6})$/);
+	if (!m) return hex;
+	let s = m[1], out = '#';
+	for (let i = 0; i < 6; i += 2) {
+		let v = hexval(substr(s, i, 1)) * 16 + hexval(substr(s, i + 1, 1));
+		v = int(v * f + 0.5);
+		if (v < 0) v = 0;
+		if (v > 255) v = 255;
+		out += sprintf('%02x', v);
+	}
+	return out;
+}
+
 	let primary, dark_primary, blur_radius, blur_radius_dark, blur_opacity, blur_opacity_dark;
 	const dark_css = readfile('/www/luci-static/sakura/css/dark.css');
-	if (access('/etc/config/argon')) {
-		primary = cfg.get_first('sakura', 'global', 'primary');
-		dark_primary = cfg.get_first('sakura', 'global', 'dark_primary');
-		blur_radius = cfg.get_first('sakura', 'global', 'blur');
-		blur_radius_dark = cfg.get_first('sakura', 'global', 'blur_dark');
-		blur_opacity = cfg.get_first('sakura', 'global', 'transparency');
-		blur_opacity_dark = cfg.get_first('sakura', 'global', 'transparency_dark');
-		mode = cfg.get_first('sakura', 'global', 'mode');
+	if (true) {   /* 原为 access('/etc/config/argon')：会让主题依赖 Argon 存在，改为始终读取 */
+		primary = sg('primary') || '#D6336C';
+		dark_primary = darken(primary || '#D6336C', 0.75);   /* ★ 自动从主色暗化 ✓ */
+		blur_radius = sg('blur') || 20;
+		blur_radius_dark = sg('blur_dark') || 20;
+		blur_opacity = sg('transparency') || '0.3';
+		blur_opacity_dark = sg('transparency_dark') || '0.3';
+		mode = sg('mode') || 'normal';
 		bar_color = (mode == 'dark') ? dark_primary : primary;
 	}
 
@@ -130,6 +157,12 @@
 				-webkit-background-size: cover !important;
 			}
 		{% endif %}
+		{% if (!dashBg): %}
+			/* 没有任何背景图时的兜底：给一个柔和粉色渐变，避免白屏 */
+			body, .main-right, .main .main-right {
+				background: linear-gradient(160deg, #fff5f8 0%, #ffe8f0 35%, #ffdce9 70%, #f9d3e2 100%) !important;
+			}
+		{% endif %}
 		{% if (dashBg && dashBgIsVideo): %}
 			.sakura-bg-video {
 				position: fixed !important; top: 0 !important; left: 0 !important;
@@ -153,10 +186,12 @@
 	<script src="{{ dispatcher.build_url('admin/translations', dispatcher.lang) }}?v={{ version.luciversion }}"></script>
 	<script src="{{ resource }}/cbi.js?v={{ version.luciversion }}"></script>
 	<script src="{{ resource }}/luci.js?v={{ version.luciversion }}"></script>
-{% if (cfg.get_first('sakura', 'global', 'sakura') == '1'): %}
-<script>window.SAKURA_COUNT = {{ +cfg.get_first('sakura', 'global', 'sakura_count') || 30 }};</script>
+{% if (sg('sakura') == '1'): %}
+<script>window.SAKURA_COUNT = {{ +sg('sakura_count') || 30 }};</script>
 <script src="{{ media }}/sakura.js?v=1.0.0" defer></script>
 {% endif %}
+<link rel="stylesheet" href="/luci-static/live2d/live2d.css">
+<script src="/luci-static/live2d/live2d.js" defer></script>
 </head>
 
 <body

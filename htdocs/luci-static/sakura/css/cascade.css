@@ -4324,7 +4324,7 @@ div[style*="display:grid;grid-template-columns:repeat"] .ifacebox .ifacebox-body
    二次元樱花主题 · 全部自定义样式
    2026-09-24 · 基于 Argon 主题（luci-theme-argon）
    删除本整段即可还原；备份文件：cascade.css.bak-20260924
-   主色在 uci：argon.@global[0].primary
+   主色在 uci：sakura.@global[0].primary
    ============================================================================ */
 
 /* ---------- 0) 配色速查 ----------

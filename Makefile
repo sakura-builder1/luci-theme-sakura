@@ -7,7 +7,7 @@ include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=Sakura Theme
 LUCI_DESCRIPTION:=Sakura theme for LuCI (based on Argon), with sakura configuration app.
-LUCI_DEPENDS:=+USE_APK:wget-any +!USE_APK:wget +jsonfilter +luci-app-sakura-config
+LUCI_DEPENDS:=+luci-app-sakura-config
 PKG_VERSION:=1.0.0
 PKG_RELEASE:=20260925
 
